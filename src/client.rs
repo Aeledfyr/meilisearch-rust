@@ -43,7 +43,7 @@ impl<'a> Client<'a> {
     /// println!("{:?}", indexes);
     /// # }
     /// ```
-    pub async fn list_all_indexes(&'a self) -> Result<Vec<Index<'a>>, Error> {
+    pub async fn list_all_indexes(&self) -> Result<Vec<Index<'_>>, Error> {
         let json_indexes = request::<(), Vec<JsonIndex>>(
             &format!("{}/indexes", self.host),
             self.apikey,
@@ -76,7 +76,7 @@ impl<'a> Client<'a> {
     /// let movies = client.get_index("movies").await.unwrap();
     /// # }
     /// ```
-    pub async fn get_index(&'a self, uid: &'a str) -> Result<Index<'a>, Error> {
+    pub async fn get_index(&self, uid: &str) -> Result<Index<'_>, Error> {
         Ok(request::<(), JsonIndex>(
             &format!("{}/indexes/{}", self.host, uid),
             self.apikey,
@@ -87,7 +87,7 @@ impl<'a> Client<'a> {
     }
 
     /// Assume that an [index](../indexes/struct.Index.html) exist and create a corresponding object without any check.
-    pub fn assume_index(&'a self, uid: &'a str) -> Index<'a> {
+    pub fn assume_index(&self, uid: &str) -> Index<'_> {
         Index {
             client: &self,
             uid: uid.to_string()
@@ -114,10 +114,10 @@ impl<'a> Client<'a> {
     /// # }
     /// ```
     pub async fn create_index(
-        &'a self,
-        uid: &'a str,
+        &self,
+        uid: &str,
         primary_key: Option<&str>,
-    ) -> Result<Index<'a>, Error> {
+    ) -> Result<Index<'_>, Error> {
         Ok(request::<Value, JsonIndex>(
             &format!("{}/indexes", self.host),
             self.apikey,
@@ -142,7 +142,7 @@ impl<'a> Client<'a> {
     }
 
     /// This will try to get an index and create the index if it does not exist.
-    pub async fn get_or_create(&'a self, uid: &'a str) -> Result<Index<'a>, Error> {
+    pub async fn get_or_create(&self, uid: &str) -> Result<Index<'_>, Error> {
         if let Ok(index) = self.get_index(uid).await {
             Ok(index)
         } else {
@@ -151,7 +151,7 @@ impl<'a> Client<'a> {
     }
 
     /// Alias for [list_all_indexes](#method.list_all_indexes).
-    pub async fn get_indexes(&'a self) -> Result<Vec<Index<'a>>, Error> {
+    pub async fn get_indexes(&self) -> Result<Vec<Index<'_>>, Error> {
         self.list_all_indexes().await
     }
 

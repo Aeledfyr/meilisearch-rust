@@ -323,10 +323,10 @@ impl<'a> Index<'a> {
     /// # }
     /// ```
     pub async fn add_or_replace<T: Document>(
-        &'a self,
+        &self,
         documents: &[T],
         primary_key: Option<&str>,
-    ) -> Result<Progress<'a>, Error> {
+    ) -> Result<Progress<'_>, Error> {
         let url = if let Some(primary_key) = primary_key {
             format!(
                 "{}/indexes/{}/documents?primaryKey={}",
@@ -348,10 +348,10 @@ impl<'a> Index<'a> {
 
     /// Alias for [add_or_replace](#method.add_or_replace).
     pub async fn add_documents<T: Document>(
-        &'a self,
+        &self,
         documents: &[T],
         primary_key: Option<&str>,
-    ) -> Result<Progress<'a>, Error> {
+    ) -> Result<Progress<'_>, Error> {
         self.add_or_replace(documents, primary_key).await
     }
 
@@ -411,10 +411,10 @@ impl<'a> Index<'a> {
     /// # }
     /// ```
     pub async fn add_or_update<T: Document>(
-        &'a self,
+        &self,
         documents: &[T],
         primary_key: Option<&str>,
-    ) -> Result<Progress<'a>, Error> {
+    ) -> Result<Progress<'_>, Error> {
         let url = if let Some(primary_key) = primary_key {
             format!(
                 "{}/indexes/{}/documents?primaryKey={}",
@@ -464,7 +464,7 @@ impl<'a> Index<'a> {
     /// # assert_eq!(movies.len(), 0);
     /// # }
     /// ```
-    pub async fn delete_all_documents(&'a self) -> Result<Progress<'a>, Error> {
+    pub async fn delete_all_documents(&self) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!("{}/indexes/{}/documents", self.client.host, self.uid),
             self.client.apikey,
@@ -509,7 +509,7 @@ impl<'a> Index<'a> {
     /// movies.delete_document("Interstellar").await.unwrap();
     /// # }
     /// ```
-    pub async fn delete_document<T: Display>(&'a self, uid: T) -> Result<Progress<'a>, Error> {
+    pub async fn delete_document<T: Display>(&self, uid: T) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!(
                 "{}/indexes/{}/documents/{}",
@@ -559,9 +559,9 @@ impl<'a> Index<'a> {
     /// # }
     /// ```
     pub async fn delete_documents<T: Display + Serialize + std::fmt::Debug>(
-        &'a self,
+        &self,
         uids: &[T],
-    ) -> Result<Progress<'a>, Error> {
+    ) -> Result<Progress<'_>, Error> {
         Ok(request::<&[T], ProgressJson>(
             &format!(
                 "{}/indexes/{}/documents/delete-batch",

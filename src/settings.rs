@@ -324,7 +324,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.set_settings(&settings).await.unwrap();
     /// # }
     /// ```
-    pub async fn set_settings(&'a self, settings: &Settings) -> Result<Progress<'a>, Error> {
+    pub async fn set_settings(&self, settings: &Settings) -> Result<Progress<'_>, Error> {
         Ok(request::<&Settings, ProgressJson>(
             &format!("{}/indexes/{}/settings", self.client.host, self.uid),
             self.client.apikey,
@@ -353,7 +353,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.set_synonyms(&synonyms).await.unwrap();
     /// # }
     /// ```
-    pub async fn set_synonyms(&'a self, synonyms: &HashMap<String, Vec<String>>) -> Result<Progress<'a>, Error> {
+    pub async fn set_synonyms(&self, synonyms: &HashMap<String, Vec<String>>) -> Result<Progress<'_>, Error> {
         Ok(request::<&HashMap<String, Vec<String>>, ProgressJson>(
             &format!("{}/indexes/{}/settings/synonyms", self.client.host, self.uid),
             self.client.apikey,
@@ -378,7 +378,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.set_stop_words(stop_words).await.unwrap();
     /// # }
     /// ```
-    pub async fn set_stop_words(&'a self, stop_words: &[&str]) -> Result<Progress<'a>, Error> {
+    pub async fn set_stop_words(&self, stop_words: &[&str]) -> Result<Progress<'_>, Error> {
         Ok(request::<&[&str], ProgressJson>(
             &format!("{}/indexes/{}/settings/stop-words", self.client.host, self.uid),
             self.client.apikey,
@@ -412,7 +412,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.set_ranking_rules(ranking_rules).await.unwrap();
     /// # }
     /// ```
-    pub async fn set_ranking_rules(&'a self, ranking_rules: &[&str]) -> Result<Progress<'a>, Error> {
+    pub async fn set_ranking_rules(&self, ranking_rules: &[&str]) -> Result<Progress<'_>, Error> {
         Ok(request::<&[&str], ProgressJson>(
             &format!("{}/indexes/{}/settings/ranking-rules", self.client.host, self.uid),
             self.client.apikey,
@@ -437,7 +437,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.set_attributes_for_faceting(attributes_for_faceting).await.unwrap();
     /// # }
     /// ```
-    pub async fn set_attributes_for_faceting(&'a self, ranking_rules: &[&str]) -> Result<Progress<'a>, Error> {
+    pub async fn set_attributes_for_faceting(&self, ranking_rules: &[&str]) -> Result<Progress<'_>, Error> {
         Ok(request::<&[&str], ProgressJson>(
             &format!("{}/indexes/{}/settings/attributes-for-faceting", self.client.host, self.uid),
             self.client.apikey,
@@ -461,7 +461,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.set_distinct_attribute("movie_id").await.unwrap();
     /// # }
     /// ```
-    pub async fn set_distinct_attribute(&'a self, distinct_attribute: &str) -> Result<Progress<'a>, Error> {
+    pub async fn set_distinct_attribute(&self, distinct_attribute: &str) -> Result<Progress<'_>, Error> {
         Ok(request::<&str, ProgressJson>(
             &format!("{}/indexes/{}/settings/distinct-attribute", self.client.host, self.uid),
             self.client.apikey,
@@ -485,7 +485,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.set_searchable_attributes(&["title", "description", "uid"]).await.unwrap();
     /// # }
     /// ```
-    pub async fn set_searchable_attributes(&'a self, searchable_attributes: &[&str]) -> Result<Progress<'a>, Error> {
+    pub async fn set_searchable_attributes(&self, searchable_attributes: &[&str]) -> Result<Progress<'_>, Error> {
         Ok(request::<&[&str], ProgressJson>(
             &format!("{}/indexes/{}/settings/searchable-attributes", self.client.host, self.uid),
             self.client.apikey,
@@ -509,7 +509,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.set_displayed_attributes(&["title", "description", "release_date", "rank", "poster"]).await.unwrap();
     /// # }
     /// ```
-    pub async fn set_displayed_attributes(&'a self, displayed_attributes: &[&str]) -> Result<Progress<'a>, Error> {
+    pub async fn set_displayed_attributes(&self, displayed_attributes: &[&str]) -> Result<Progress<'_>, Error> {
         Ok(request::<&[&str], ProgressJson>(
             &format!("{}/indexes/{}/settings/displayed-attributes", self.client.host, self.uid),
             self.client.apikey,
@@ -533,7 +533,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.set_accept_new_fields(false).await.unwrap();
     /// # }
     /// ```
-    pub async fn set_accept_new_fields(&'a self, accept_new_fields: bool) -> Result<Progress<'a>, Error> {
+    pub async fn set_accept_new_fields(&self, accept_new_fields: bool) -> Result<Progress<'_>, Error> {
         Ok(request::<bool, ProgressJson>(
             &format!("{}/indexes/{}/settings/accept-new-fields", self.client.host, self.uid),
             self.client.apikey,
@@ -558,7 +558,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.reset_settings().await.unwrap();
     /// # }
     /// ```
-    pub async fn reset_settings(&'a self) -> Result<Progress<'a>, Error> {
+    pub async fn reset_settings(&self) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!("{}/indexes/{}/settings", self.client.host, self.uid),
             self.client.apikey,
@@ -582,7 +582,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.reset_synonyms().await.unwrap();
     /// # }
     /// ```
-    pub async fn reset_synonyms(&'a self) -> Result<Progress<'a>, Error> {
+    pub async fn reset_synonyms(&self) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!("{}/indexes/{}/settings/synonyms", self.client.host, self.uid),
             self.client.apikey,
@@ -606,7 +606,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.reset_stop_words().await.unwrap();
     /// # }
     /// ```
-    pub async fn reset_stop_words(&'a self) -> Result<Progress<'a>, Error> {
+    pub async fn reset_stop_words(&self) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!("{}/indexes/{}/settings/stop-words", self.client.host, self.uid),
             self.client.apikey,
@@ -631,7 +631,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.reset_ranking_rules().await.unwrap();
     /// # }
     /// ```
-    pub async fn reset_ranking_rules(&'a self) -> Result<Progress<'a>, Error> {
+    pub async fn reset_ranking_rules(&self) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!("{}/indexes/{}/settings/ranking-rules", self.client.host, self.uid),
             self.client.apikey,
@@ -655,7 +655,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.reset_attributes_for_faceting().await.unwrap();
     /// # }
     /// ```
-    pub async fn reset_attributes_for_faceting(&'a self) -> Result<Progress<'a>, Error> {
+    pub async fn reset_attributes_for_faceting(&self) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!("{}/indexes/{}/settings/attributes-for-faceting", self.client.host, self.uid),
             self.client.apikey,
@@ -679,7 +679,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.reset_distinct_attribute().await.unwrap();
     /// # }
     /// ```
-    pub async fn reset_distinct_attribute(&'a self) -> Result<Progress<'a>, Error> {
+    pub async fn reset_distinct_attribute(&self) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!("{}/indexes/{}/settings/distinct-attribute", self.client.host, self.uid),
             self.client.apikey,
@@ -703,7 +703,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.reset_searchable_attributes().await.unwrap();
     /// # }
     /// ```
-    pub async fn reset_searchable_attributes(&'a self) -> Result<Progress<'a>, Error> {
+    pub async fn reset_searchable_attributes(&self) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!("{}/indexes/{}/settings/searchable-attributes", self.client.host, self.uid),
             self.client.apikey,
@@ -727,7 +727,7 @@ impl<'a> Index<'a> {
     /// let progress = movie_index.reset_displayed_attributes().await.unwrap();
     /// # }
     /// ```
-    pub async fn reset_displayed_attributes(&'a self) -> Result<Progress<'a>, Error> {
+    pub async fn reset_displayed_attributes(&self) -> Result<Progress<'_>, Error> {
         Ok(request::<(), ProgressJson>(
             &format!("{}/indexes/{}/settings/displayed-attributes", self.client.host, self.uid),
             self.client.apikey,

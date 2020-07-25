@@ -199,8 +199,8 @@ impl<'a> Query<'a> {
 
     /// Alias for [the Index method](../indexes/struct.Index.html#method.search).
     pub async fn execute<T: 'static + DeserializeOwned>(
-        &'a self,
-        index: &Index<'a>,
+        &self,
+        index: &Index<'_>,
     ) -> Result<SearchResults<T>, Error> {
         index.search::<T>(&self).await
     }
